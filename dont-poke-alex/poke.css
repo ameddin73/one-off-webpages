@@ -10,3 +10,8 @@ html, body {
     top: 0px;
     cursor: pointer;
 }
+
+.faceLeft {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
