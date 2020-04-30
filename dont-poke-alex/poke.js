@@ -1,48 +1,49 @@
 var myGamePiece;
 
 function startGame() {
-    myGamePiece = new component(30, 30, "red", 10, 120);
-    controller.start();
+    myGamePiece = new component(100, 100, 1, "public/research-dog.png");
+    this.interval = setInterval(updateGameArea, 20);
 }
 
-var controller = {
-    canvas: document.createElement("canvas"),
-    start: function () {
-        this.context = this.canvas.getContext("2d");
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateGameArea, 20);
-    },
-    setCanvas: function () {
-        this.context = this.canvas.getContext("2d");
-        this.context.canvas.width = window.innerWidth;
-        this.context.canvas.height = window.innerHeight;
-    },
-    getCanvas: function () {
-        return {
-            height: this.context.canvas.height,
-            width: this.context.canvas.width,
-        }
-    },
-    clear: function () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+const getCanvas = function () {
+    return {
+        height: window.innerHeight,
+        width: window.innerWidth,
     }
 }
 
-function component(width, height, color, x, y) {
+const getNumber = function (position, incr) {
+    console.log(position)
+    let value = parseInt(position.match(/(\d+)/), 10);
+    value += incr;
+    console.log(value)
+    return value + "px";
+}
+
+function component(width, height, speed, src) {
     this.width = width;
     this.height = height;
-    this.speedX = 2;
-    this.speedY = 2;
-    this.x = x;
-    this.y = y;
+    this.speedX = speed;
+    this.speedY = speed;
+    this.x = 0;
+    this.y = 0;
+    var alex = new Image(width, height);
+    alex.src = src;
+    alex.className = "alex";
+    alex.onclick = () => {
+        console.log('nope')
+        alert('huh')
+    }
+    document.body.appendChild(alex);
     this.update = function () {
-        ctx = controller.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        this.x += this.speedX;
+        this.y += this.speedY;
+        alex.style.left = this.x + "px";
+        alex.style.top = this.y + "px";
     };
     this.collide = function () {
         // Bottom
-        if (this.y + this.height >= controller.getCanvas().height) {
+        if (this.y + this.height >= getCanvas().height) {
             this.speedY = -1 * this.speedY;
         }
         // Top
@@ -50,14 +51,35 @@ function component(width, height, color, x, y) {
             this.speedY = -1 * this.speedY;
         }
         // Right
-        if (this.x + this.width >= controller.getCanvas().width) {
+        if (this.x + this.width >= getCanvas().width) {
             this.speedX = -1 * this.speedX;
         }
         // Left
         if (this.x <= 0) {
             this.speedX = -1 * this.speedX;
         }
-    }
+    };
+    this.outOfBounds = function () {
+        // Bottom
+        if (this.y > getCanvas().height) {
+            startGame();
+            return;
+        }
+        // Top
+        if (this.y < 0 - this.height) {
+            startGame();
+            return;
+        }
+        // Right
+        if (this.x > getCanvas().width) {
+            startGame();
+            return;
+        }
+        // Left
+        if (this.x < 0 - this.width) {
+            startGame();
+        }
+    };
     this.newPos = function () {
         this.x += this.speedX;
         this.y += this.speedY;
@@ -65,9 +87,8 @@ function component(width, height, color, x, y) {
 }
 
 function updateGameArea() {
-    controller.clear();
-    controller.setCanvas();
     myGamePiece.newPos();
+    myGamePiece.outOfBounds();
     myGamePiece.collide();
     myGamePiece.update();
 }

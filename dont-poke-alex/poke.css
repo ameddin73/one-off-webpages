@@ -3,3 +3,10 @@ html, body {
     height: 100%;
     margin: 0;
 }
+
+.alex {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+}
