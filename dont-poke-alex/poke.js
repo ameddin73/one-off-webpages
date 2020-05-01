@@ -1,9 +1,19 @@
-var myGamePiece;
+let myGamePiece;
+let body;
+let angrySounds;
 const src = "assets/images/alex_default.png";
+let clickCounter = 0;
 
 function startGame() {
     myGamePiece = new component(150, 185, 2);
+    body = document.getElementsByTagName("BODY")[0];
+    angrySounds = document.createElement("AUDIO");
+    angrySounds.setAttribute("src", 'assets/audio/click_crazy.ogg');
+    angrySounds.loop = true;
+    document.body.appendChild(angrySounds);
+
     this.interval = setInterval(updateGameArea, 20);
+    derclick();
 }
 
 const getCanvas = function () {
@@ -20,6 +30,7 @@ function component(width, height, speed) {
     this.speedY = speed;
     this.x = 0;
     this.y = 0;
+    let comp = this;
 
     const alex = new Image(width, height);
     let sfx = document.createElement("AUDIO");
@@ -27,12 +38,23 @@ function component(width, height, speed) {
     alex.src = src;
     alex.className = "alex";
     alex.onclick = async function () {
+        clickCounter++;
         sfx.setAttribute("src", getPokeSound());
         sfx.play();
 
         alex.src = getPokeImage();
+        let tempSpeedX = comp.speedX;
+        let tempSpeedY = comp.speedY;
+        if (tempSpeedX !== 0) {
+            comp.speedX = 0;
+            comp.speedY = 0;
+        }
         await sleep(300)
         alex.src = src;
+        if (tempSpeedX !== 0) {
+            comp.speedX = tempSpeedX;
+            comp.speedY = tempSpeedY;
+        }
     }
 
     document.body.appendChild(sfx);
@@ -97,10 +119,31 @@ function component(width, height, speed) {
 }
 
 function updateGameArea() {
+    clickCrazy();
     myGamePiece.newPos();
     myGamePiece.outOfBounds();
     myGamePiece.collide();
     myGamePiece.update();
+}
+
+async function clickCrazy() {
+
+    if (clickCounter > 10) {
+        body.classList.add("clickCrazy");
+        if (angrySounds.paused)
+            angrySounds.play();
+    } else {
+        body.classList.remove("clickCrazy");
+        angrySounds.pause();
+    }
+}
+
+async function derclick() {
+    while (true) {
+        const subtractor = clickCounter > 10 ? 3 : 1;
+        await sleep(500);
+        clickCounter = Math.max(0, clickCounter - subtractor);
+    }
 }
 
 function sleep(ms) {

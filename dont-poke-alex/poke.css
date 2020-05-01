@@ -1,5 +1,5 @@
 html, body {
-    width:  100%;
+    width: 100%;
     height: 100%;
     margin: 0;
 }
@@ -14,4 +14,20 @@ html, body {
 .faceLeft {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
+}
+
+.clickCrazy {
+    background-color: #ff0817;
+    animation-name: color;
+    animation-duration: 300ms;
+    animation-iteration-count: infinite;
+}
+
+@keyframes color {
+    0% {
+        background-color: red;
+    }
+    100% {
+        background-color: #883100;
+    }
 }
