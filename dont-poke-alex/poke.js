@@ -1,8 +1,8 @@
 var myGamePiece;
-const src = "assets/research-dog.png";
+const src = "assets/images/alex_default.png";
 
 function startGame() {
-    myGamePiece = new component(100, 100, 2);
+    myGamePiece = new component(150, 185, 2);
     this.interval = setInterval(updateGameArea, 20);
 }
 
@@ -22,14 +22,15 @@ function component(width, height, speed) {
     this.y = 0;
 
     const alex = new Image(width, height);
-    const sfx = document.createElement("AUDIO");
+    let sfx = document.createElement("AUDIO");
 
     alex.src = src;
     alex.className = "alex";
     alex.onclick = async function () {
-        sfx.setAttribute("src", sfxs[Math.floor(Math.random() * sfxs.length)])
+        sfx.setAttribute("src", getPokeSound());
         sfx.play();
-        alex.src = srcs[Math.floor(Math.random() * srcs.length)];
+
+        alex.src = getPokeImage();
         await sleep(300)
         alex.src = src;
     }
@@ -106,9 +107,12 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const srcs = [
-    "assets/research-dog-boom.png",
-]
-const sfxs = [
-    "assets/poke.mp3",
-]
+const getPokeImage = function () {
+    const selection = Math.floor(Math.random() * 7) + 1;
+    return 'assets/images/alex_poke' + selection + '.png';
+}
+
+const getPokeSound = function () {
+    const selection = Math.floor(Math.random() * 19) + 1;
+    return 'assets/audio/alex_poke' + selection + '.ogg';
+}
