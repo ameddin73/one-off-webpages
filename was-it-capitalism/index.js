@@ -19,12 +19,11 @@ $(document).ready(async function () {
     });
 
     $('#yes-button').click(() => {
-        // isCapitalism = true;
-        // $('#modal-card').removeClass('card-failure');
-        // $('#modal-card').addClass('card-success');
-        // $('.overlay').show();
-        // OpenModal();
-        Refresh();
+        isCapitalism = true;
+        $('#modal-card').removeClass('card-failure');
+        $('#modal-card').addClass('card-success');
+        $('.overlay').show();
+        OpenModal();
     });
     $('#no-button').click(() => {
         isCapitalism = false;
