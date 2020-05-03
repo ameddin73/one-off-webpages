@@ -1,11 +1,12 @@
+.local-header {
+    position: fixed;
+}
+
 .mdl-grid {
     padding-top: 56px;
     flex-direction: column;
     align-items: center;
-}
-
-.local-header {
-    position: fixed;
+    overflow: scroll;
 }
 
 ::-webkit-scrollbar {
@@ -14,18 +15,21 @@
 }
 
 .prompt-container {
-    position: fixed;
+    flex-direction: column;
+    position: sticky;
     bottom: 0;
+    background-color: white;
+    padding-top: 0px;
 }
 
 .prompt {
     display: none;
+    position: sticky;
 }
 
 .button-grid {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 34px;
 }
 
 .overlay {
@@ -36,6 +40,7 @@
     margin: 0;
     background-color: #171b1b;
     opacity: .8;
+    z-index: 5;
 }
 
 .modal {
