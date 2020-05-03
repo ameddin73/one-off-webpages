@@ -16,26 +16,29 @@
     <script src="wikiApi.js"></script>
     <script src="index.js"></script>
     <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="assets/favicon.png">
 </head>
 <body>
 <div class="mdl-layout--fixed-header mdl-js-layout">
     <header class="mdl-layout__header mdl-layout__header--scroll local-header">
-        <div class="mdl-layout-icon"></div>
+        <div class="mdl-layout-icon">
+            <img id="logo" src="assets/logo.png">
+        </div>
         <div class="mdl-layout__header-row">
             <span class="mdl-layout__title">Was it Capitalism?</span>
         </div>
     </header>
     <div class="mdl-grid">
         <div class="mdl-cell--6-col">
-            <h4 id="title"></h4>
+            <a id="wiki-link" target="_blank"><h4 id="title"></h4></a>
         </div>
-        <div class="mdl-cell--6-col" id="extract">
-        </div>
+        <img id="image" alt="" src=""/>
+        <div class="mdl-cell--6-col" id="extract"></div>
         <div id="loading-spinner" class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
     </div>
     <div class="mdl-grid prompt-container">
         <h5 class="prompt">Was this caused by capitalism?</h5>
-        <div class="mdl-cell--6-col button-grid prompt">
+        <div class="prompt mdl-cell--6-col button-grid">
             <button id="yes-button"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                 Yes

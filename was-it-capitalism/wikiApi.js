@@ -1,7 +1,7 @@
 const baseURI = 'https://en.wikipedia.org/w/api.php?action=query&format=json'
 
 function GetArticle(title) {
-    const query = '&prop=extracts|pageimages|info|categories|revisions&pithumbsize=400&origin=*&exintro&inprop=url&rvprop=content&rvslots=main&titles=' + title;
+    const query = '&prop=extracts|pageimages|info|revisions&pithumbsize=400&origin=*&exintro&inprop=url&rvprop=content&rvslots=main&titles=' + title;
     return QueryAPI(query);
 }
 

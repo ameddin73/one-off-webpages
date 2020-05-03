@@ -1,12 +1,33 @@
 .local-header {
     position: fixed;
 }
+.mdl-layout__header>.mdl-layout-icon {
+    width: 46px;
+}
 
 .mdl-grid {
     padding-top: 56px;
     flex-direction: column;
     align-items: center;
     overflow: scroll;
+}
+
+#logo {
+    max-height: 100%;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+#wiki-link {
+    text-decoration: none;
+}
+
+#image {
+    max-width: calc(50% - 16px);
+    max-height: 400px;
+    width: auto;
+    height: auto;
 }
 
 ::-webkit-scrollbar {
@@ -18,8 +39,8 @@
     flex-direction: column;
     position: sticky;
     bottom: 0;
-    background-color: white;
-    padding-top: 0px;
+    background-image: linear-gradient(to top, white 80%, transparent);
+    padding-top: 10px;
 }
 
 .prompt {

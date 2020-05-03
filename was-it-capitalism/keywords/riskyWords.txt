@@ -6,7 +6,8 @@ tsunami
 avalanche
 landslide
 sinkhole
-volcanic eruption
+volcanic
+eruption
 blizzard
 hailstorm
 cold wave
@@ -20,13 +21,12 @@ disease
 epidemic
 pandemic
 extermination
-slave
 slavery
-slave trade
+slave
 hurricane
 earthquake
 rape
-sexual assault
+sexual
 genocide
 holocaust
 holodomor
@@ -48,3 +48,6 @@ pearl harbor
 terrorism
 asteroid
 comet
+pronunciation:
+catagory:articles
+ethnic
