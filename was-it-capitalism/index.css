@@ -3,6 +3,7 @@
 }
 .mdl-layout__header>.mdl-layout-icon {
     width: 46px;
+    left: 20px;
 }
 
 .mdl-grid {
