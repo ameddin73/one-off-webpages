@@ -31,6 +31,17 @@ genocide
 holocaust
 holodomor
 aardakh
-redirect
+#redirect
 stampede
 mud flow
+lang
+soviet
+geomagnetic
+storm
+template
+ancient
+early human
+9/11
+september 11
+september 11th
+pearl harbor

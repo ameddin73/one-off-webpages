@@ -2,19 +2,55 @@ const riskyWordsFile = 'riskyWords.txt';
 const listArticlesFile = 'listArticles.txt';
 let listArticleTitles;
 let riskyWords;
+let isCapitalism = true;
+let currentTitle = '';
 
 $(document).ready(async function () {
     listArticleTitles = await GetListArticleTitles();
     riskyWords = await GetRiskyWords();
+    await Refresh();
 
-    $('#refresh').click(function () {
-        Refresh();
+    $('#try-again').click(() => {
+       Refresh();
+    });
+
+    $('#yes-button').click(() => {
+        isCapitalism = true;
+        $('#modal-card').removeClass('card-failure');
+        $('#modal-card').addClass('card-success');
+        $('.overlay').show();
+        OpenModal();
+    });
+    $('#no-button').click(() => {
+        isCapitalism = false;
+        $('#modal-card').removeClass('card-success');
+        $('#modal-card').addClass('card-failure');
+        $('.overlay').show();
+        OpenModal();
     });
 });
 
+function OpenModal() {
+    if (isCapitalism) {
+        $('#modal-icon').text('check_circle');
+        $('#modal-title').text('Correct!');
+        $('#modal-body').text(currentTitle + ' is an unfortunate result of capitalism.');
+    } else {
+        $('#modal-icon').text('cancel');
+        $('#modal-title').text('Incorrect');
+        $('#modal-body').text(currentTitle + ' is indeed a tragic result of capitalism.');
+    }
+    $('.modal').show();
+}
+
 async function Refresh() {
+    $('#title').empty();
+    $('#extract').empty();
+    $('#loading-spinner').show();
+    $('.prompt').hide();
+    $('.modal').hide();
+    $('.overlay').hide();
     let list = SelectListArticle();
-    console.log(list)
     let articleTitle;
 
     // Fetch an article from the list and if it is itself a list
@@ -23,31 +59,32 @@ async function Refresh() {
         list = await GetListArticle(list);
         articleTitle = SelectArticle(list['links']);
         list = articleTitle;
-    } while (list.includes('List'))
+    } while (list.includes('List') || list.includes('Template'))
 
     // Just try all over again if you find a risky word can't be too spensy
     const article = await GetArticle(articleTitle);
-    console.dir(article)
     if (ContainsRiskyWord(article['revisions'][0]['slots']['main']['*']))
         return Refresh();
 
+    $('#loading-spinner').hide();
     const title = article['title'];
     const extract = article['extract'];
-    $("#title").text(title);
-    $("#extract").empty();
-    $("#extract").append(extract);
+    currentTitle = title
+    $('#title').text(title);
+    $('#extract').append(extract);
+    $('.prompt').show();
 }
 
 function ContainsRiskyWord(content) {
-    let contains = false;
-    content = content.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    content = content.replace(/[.,\/!$%\^&\*;:{}=\-_`~()]/g,"");
     let words = content.split(' ');
-    words.map((word) => {
-        word = word.toLowerCase();
-        if (riskyWords.hasOwnProperty(word))
-            contains = true;
-    });
-    return contains;
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i].toLowerCase().trimEnd();
+        if (riskyWords.hasOwnProperty(word) && word !== '') {
+            return true;
+        }
+    }
+    return false;
 }
 
 function SelectArticle(list) {

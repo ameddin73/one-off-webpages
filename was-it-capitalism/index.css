@@ -1,6 +1,72 @@
-.main-content {
-    display: flex;
-    align-content: center;
-    flex-flow: column;
+.mdl-grid {
+    padding-top: 56px;
+    flex-direction: column;
     align-items: center;
+}
+
+.local-header {
+    position: fixed;
+}
+
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+.prompt-container {
+    position: fixed;
+    bottom: 0;
+}
+
+.prompt {
+    display: none;
+}
+
+.button-grid {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 34px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    background-color: #171b1b;
+    opacity: .8;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    z-index: 10;
+}
+
+.card-square.mdl-card {
+    width: 320px;
+    height: 360px;
+}
+
+.card-success {
+     color: #fff;
+     background: #46B6AC;
+ }
+
+.card-failure {
+    color: #fff;
+    background: #cb3854;
+}
+
+.material-icons {
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    font-size: 72px;
 }

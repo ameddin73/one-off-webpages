@@ -7,34 +7,58 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-purple.min.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-light_blue.min.css" />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"
             integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
 
     <script src="wikiApi.js"></script>
     <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <div class="mdl-layout--fixed-header mdl-js-layout">
-    <header class="mdl-layout__header">
+    <header class="mdl-layout__header mdl-layout__header--scroll local-header">
         <div class="mdl-layout-icon"></div>
         <div class="mdl-layout__header-row">
             <span class="mdl-layout__title">Was it Capitalism?</span>
         </div>
     </header>
-    <div class="main-content">
-        <div class="" id="title">
+    <div class="mdl-grid">
+        <div class="mdl-cell--6-col">
+            <h4 id="title"></h4>
         </div>
-        <div class="" id="extract">
+        <div class="mdl-cell--6-col" id="extract">
         </div>
-        <div class="">
-            <button id="refresh"
+        <div id="loading-spinner"class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+        <h5 class="prompt">Was this caused by capitalism?</h5>
+        <div class="mdl-cell--6-col button-grid prompt">
+            <button id="yes-button"
                     class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-                Try again
+                Yes
+            </button>
+            <button id="no-button"
+                    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                No
             </button>
         </div>
     </div>
 </div>
+
+<div class="modal">
+    <div class="card-square mdl-card mdl-shadow--2dp">
+        <div id="modal-card" class="mdl-card__title mdl-card--expand">
+            <i id="modal-icon" class="material-icons"></i>
+            <h2 id="modal-title" class="mdl-card__title-text"></h2>
+        </div>
+        <div id="modal-body" class="mdl-card__supporting-text"></div>
+        <div class="mdl-card__actions mdl-card--border">
+            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="try-again">Try again</a>
+        </div>
+    </div>
+</div>
+
+<div class="overlay"></div>
 </body>
 </html>
