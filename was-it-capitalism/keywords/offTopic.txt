@@ -27,9 +27,14 @@ book:
 is a village
 is a municipality
 voting system
-is a comune
+is a commune
 an expert
 is a novel
-unit of
+unit
 commentator
 house of congress
+is a chemical
+unionist
+social reformer
+media website
+municipal
