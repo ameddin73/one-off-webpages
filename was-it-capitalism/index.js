@@ -107,6 +107,7 @@ async function Refresh() {
         $('#image').attr('alt', articleTitle);
         $('#image').attr('src', image);
     }
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 }
 
 function ContainsRiskyWord(content) {

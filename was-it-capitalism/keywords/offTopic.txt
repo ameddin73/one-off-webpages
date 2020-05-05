@@ -23,3 +23,13 @@ activist
 surname
 administrative divisions
 parish
+book:
+is a village
+is a municipality
+voting system
+is a comune
+an expert
+is a novel
+unit of
+commentator
+house of congress
